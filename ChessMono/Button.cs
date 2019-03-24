@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace ChessMono
 {
-    class Button : IDrawable, IUpdateable
+    class Button : IDrawable, IUpdateable, IDisposable
     {
 
         public event Action mouseLeftClick;
@@ -30,12 +30,14 @@ namespace ChessMono
 
         public void Draw(SpriteBatch sprite)
         {
+            if (disposed) return;
             sprite.Draw(Game1.textures["button"], Size, Color.White);
             sprite.DrawString(Game1.fonts["font"], Text, new Vector2(Size.X + 60, Size.Y + 15), Color.White);
         }
         bool isClicked;
         public void Update()
         {
+            if (disposed) return;
             MouseState mouse = Mouse.GetState();
 
             if (Size.Contains(mouse.Position) && mouse.LeftButton == ButtonState.Pressed)
@@ -50,6 +52,11 @@ namespace ChessMono
             if (mouse.LeftButton == ButtonState.Released)
                 isClicked = false;
 
+        }
+        bool disposed;
+        public void Dispose()
+        {
+            disposed = true;
         }
     }
 }

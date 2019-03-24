@@ -47,6 +47,9 @@ namespace ChessMono
         {
             // TODO: Add your initialization logic here
             IsMouseVisible = true;
+            graphics.PreferredBackBufferHeight = 190;
+            graphics.PreferredBackBufferWidth = 186;
+            graphics.ApplyChanges();
             Registry.Init();
             Registry.RegisterRenderers();
             Registry.RegisterUpdates();

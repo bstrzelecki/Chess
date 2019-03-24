@@ -12,7 +12,7 @@ namespace ChessMono
     {
         public Button startButton = new Button("Start", 20, 20, 150, 50);
         public Button quitButton = new Button("Quit", 20, 80, 150, 50);
-
+        public Board board = new Board();
         public void Init()
         {
             startButton.mouseLeftClick += StartButton_mouseLeftClick;
@@ -26,7 +26,10 @@ namespace ChessMono
 
         private void StartButton_mouseLeftClick()
         {
-            
+            Game1.RemoveRenderer(this);
+            Game1.RegisterRenderer(board);
+            startButton.Dispose();
+            quitButton.Dispose();
         }
 
         public void Draw(SpriteBatch sprite)
