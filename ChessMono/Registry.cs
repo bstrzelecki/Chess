@@ -33,13 +33,14 @@ namespace ChessMono
             game.Load("board");
             game.Load("numbers");
             game.Load("text");
-            game.Load("bg");
+            game.Load("dot");
             game.LoadFont("font");
         }
         public static void RegisterUpdates()
         {
             Game1.RegisterUpdate(mainMenu.startButton);
             Game1.RegisterUpdate(mainMenu.quitButton);
+            Game1.RegisterUpdate(mainMenu.board);
         }
         public static void RegisterRenderers()
         {

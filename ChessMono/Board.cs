@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace ChessMono
 {
@@ -63,12 +64,19 @@ namespace ChessMono
                     sprite.Draw(Game1.textures[piece.color + "_" + piece.type], new Vector2(12+offset.X * x,4+offset.Y * y), Color.White);
                 }
             }
-            
+            sprite.DrawString(Game1.fonts["font"],x + "," + y, new Vector2(50, 50), Color.Red);
         }
-
+        int x, y;
         public void Update()
         {
-            throw new NotImplementedException();
+            MouseState mouse = Mouse.GetState();
+            x = mouse.X;
+            y = mouse.Y;
+
+            x = (x - 10) / 22;
+            y = (y - 2) /  22;
+
+
         }
     }
 }
