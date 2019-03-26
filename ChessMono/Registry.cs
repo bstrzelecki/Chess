@@ -9,7 +9,7 @@ namespace ChessMono
     class Registry
     {
         static MainMenu mainMenu = new MainMenu();
-
+        public static int currentScene = 0;
         public static void Init()
         {
             mainMenu.Init();

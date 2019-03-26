@@ -28,6 +28,7 @@ namespace ChessMono
         {
             Game1.RemoveRenderer(this);
             Game1.RegisterRenderer(board);
+            Registry.currentScene++;
             startButton.Dispose();
             quitButton.Dispose();
         }

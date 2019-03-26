@@ -94,10 +94,8 @@ namespace ChessMono
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
             foreach (IUpdateable update in updates)
                 update.Update();
-
             base.Update(gameTime);
         }
 
