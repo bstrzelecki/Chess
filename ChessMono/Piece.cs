@@ -119,25 +119,84 @@ namespace ChessMono
             }
             if(type == "bishop")
             {
-                for(int i = 0;i < 8; i++)
+                for(int i = 1;i < 8; i++)
                 {
                     tiles = checkAndAdd(new Vector2(position.X-i, position.Y - i), map, tiles);
+                    if (position.X - i > 7 || position.X - i < 0) break;
+                    if (position.Y - i > 7 || position.Y - i < 0) break;
                     if (!map[(int)position.X - i, (int)position.Y - i].isEmpty) break;
                 }
-                for (int i = 0; i < 8; i++)
+                for (int i = 1; i < 8; i++)
                 {
                     tiles = checkAndAdd(new Vector2(position.X + i, position.Y - i), map, tiles);
+                    if (position.X + i > 7 || position.X + i < 0) break;
+                    if (position.Y - i > 7 || position.Y - i < 0) break;
                     if (!map[(int)position.X + i, (int)position.Y - i].isEmpty) break;
                 }
-                for (int i = 0; i < 8; i++)
+                for (int i = 1; i < 8; i++)
                 {
                     tiles = checkAndAdd(new Vector2(position.X - i, position.Y + i), map, tiles);
+                    if (position.X - i > 7 || position.X - i < 0) break;
+                    if (position.Y + i > 7 || position.Y + i < 0) break;
                     if (!map[(int)position.X - i, (int)position.Y + i].isEmpty) break;
                 }
-                for (int i = 0; i < 8; i++)
+                for (int i = 1; i < 8; i++)
                 {
                     tiles = checkAndAdd(new Vector2(position.X + i, position.Y + i), map, tiles);
+                    if (position.X + i > 7 || position.X + i < 0) break;
+                    if (position.Y + i > 7 || position.Y + i < 0) break;
                     if (!map[(int)position.X + i, (int)position.Y + i].isEmpty) break;
+                }
+            }
+            if(type == "queen")
+            {
+                for (int i = 1; i < 8; i++)
+                {
+                    tiles = checkAndAdd(new Vector2(position.X - i, position.Y - i), map, tiles);
+                    if (position.X - i > 7 || position.X - i < 0) break;
+                    if (position.Y - i > 7 || position.Y - i < 0) break;
+                    if (!map[(int)position.X - i, (int)position.Y - i].isEmpty) break;
+                }
+                for (int i = 1; i < 8; i++)
+                {
+                    tiles = checkAndAdd(new Vector2(position.X + i, position.Y - i), map, tiles);
+                    if (position.X + i > 7 || position.X + i < 0) break;
+                    if (position.Y - i > 7 || position.Y - i < 0) break;
+                    if (!map[(int)position.X + i, (int)position.Y - i].isEmpty) break;
+                }
+                for (int i = 1; i < 8; i++)
+                {
+                    tiles = checkAndAdd(new Vector2(position.X - i, position.Y + i), map, tiles);
+                    if (position.X - i > 7 || position.X - i < 0) break;
+                    if (position.Y + i > 7 || position.Y + i < 0) break;
+                    if (!map[(int)position.X - i, (int)position.Y + i].isEmpty) break;
+                }
+                for (int i = 1; i < 8; i++)
+                {
+                    tiles = checkAndAdd(new Vector2(position.X + i, position.Y + i), map, tiles);
+                    if (position.X + i > 7 || position.X + i < 0) break;
+                    if (position.Y + i > 7 || position.Y + i < 0) break;
+                    if (!map[(int)position.X + i, (int)position.Y + i].isEmpty) break;
+                }
+                for (int i = (int)position.X + 1; i < 8; i++)
+                {
+                    tiles = checkAndAdd(new Vector2(i, position.Y), map, tiles);
+                    if (!map[i, (int)position.Y].isEmpty) break;
+                }
+                for (int i = (int)position.X - 1; i >= 0; i--)
+                {
+                    tiles = checkAndAdd(new Vector2(i, position.Y), map, tiles);
+                    if (!map[i, (int)position.Y].isEmpty) break;
+                }
+                for (int i = (int)position.Y + 1; i < 8; i++)
+                {
+                    tiles = checkAndAdd(new Vector2(position.X, i), map, tiles);
+                    if (!map[(int)position.X, i].isEmpty) break;
+                }
+                for (int i = (int)position.Y - 1; i >= 0; i--)
+                {
+                    tiles = checkAndAdd(new Vector2(position.X, i), map, tiles);
+                    if (!map[(int)position.X, i].isEmpty) break;
                 }
             }
             return tiles;
