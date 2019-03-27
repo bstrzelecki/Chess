@@ -15,6 +15,7 @@ namespace ChessMono
         public Piece[,] map = new Piece[8, 8];
         public Vector2 offset = new Vector2(22, 22);
         public Vector2 selectedPiece;
+        bool isWhiteTurn = true;
         public void Init()
         {
             for (int x = 0; x < 8; x++)
@@ -103,9 +104,11 @@ namespace ChessMono
 
             if(mouse.LeftButton == ButtonState.Pressed && !isPicking)
             {
-                moves = map[x, y].getMoves(new Vector2(x,y),map);
-                selectedPiece = new Vector2(x, y);
-                isPicking = true;
+                if ((isWhiteTurn && map[x, y].isWhite)||(!isWhiteTurn && !map[x, y].isWhite)) {
+                    moves = map[x, y].getMoves(new Vector2(x, y), map);
+                    selectedPiece = new Vector2(x, y);
+                    isPicking = true;
+                }
             }
 
             if (mouse.LeftButton == ButtonState.Released && isPicking)
@@ -115,6 +118,7 @@ namespace ChessMono
                     map[x, y] = map[(int)selectedPiece.X, (int)selectedPiece.Y];
                     map[(int)selectedPiece.X, (int)selectedPiece.Y] = new Piece();
                     map[x, y].isPawnFirstMove = false;
+                    isWhiteTurn = !isWhiteTurn;
                 }
                 moves = new List<Vector2>();
                 isPicking =false;
