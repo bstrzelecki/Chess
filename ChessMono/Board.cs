@@ -13,6 +13,7 @@ namespace ChessMono
     class Board : IDrawable, IUpdateable
     {
         public Piece[,] map = new Piece[8, 8];
+        protected Piece[,] lastMap = new Piece[8, 8];
         public Vector2 offset = new Vector2(22, 22);
         public Vector2 selectedPiece;
         bool isWhiteTurn = true;
@@ -61,6 +62,7 @@ namespace ChessMono
                     }
                 }
             }
+            lastMap = map;
         }
         public void Draw(SpriteBatch sprite)
         {
@@ -91,6 +93,7 @@ namespace ChessMono
         }
         int x, y;
         bool isPicking;
+        bool isUndo;
         protected List<Vector2> moves = new List<Vector2>();
         public void Update()
         {
@@ -115,6 +118,7 @@ namespace ChessMono
             {
                 if(moves.Contains(new Vector2(x, y)))
                 {
+                    lastMap = map;
                     map[x, y] = map[(int)selectedPiece.X, (int)selectedPiece.Y];
                     map[(int)selectedPiece.X, (int)selectedPiece.Y] = new Piece();
                     map[x, y].isPawnFirstMove = false;
@@ -122,6 +126,16 @@ namespace ChessMono
                 }
                 moves = new List<Vector2>();
                 isPicking =false;
+            }
+            KeyboardState state = Keyboard.GetState();
+            if(state.IsKeyDown(Keys.LeftControl)  && state.IsKeyDown(Keys.Z) && !isUndo)
+            {
+                isUndo = true;
+                map = lastMap;
+            }
+            if (state.IsKeyUp(Keys.Z) || state.IsKeyUp(Keys.LeftControl))
+            {
+                isUndo = false;
             }
 
         }
